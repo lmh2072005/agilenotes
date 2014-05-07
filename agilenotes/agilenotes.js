@@ -55,7 +55,7 @@ passport.use(new LocalStrategy(
 ));
 
 agilenotes.configure(function() {
-	agilenotes.set('port', process.env.PORT || 8080);
+	agilenotes.set('port', process.env.PORT || 80);
 	// agilenotes.set('views', __dirname + '/views');
 	// agilenotes.set('view engine', 'jade');
 	agilenotes.use(express.favicon());
@@ -67,11 +67,13 @@ agilenotes.configure(function() {
 	agilenotes.use(passport.initialize());
 	agilenotes.use(passport.session());
 	agilenotes.use(agilenotes.router);
+	agilenotes.set('views', __dirname + '/views');
+	agilenotes.set('view engine', 'ejs');
 	agilenotes.use(express.static(__dirname + '/public'));
 	
 	agilenotes.set('passport', passport);
 	
-	// Authorization mode: include inherit current.
+	// Authorization mode: include,inherit,current.
 	agilenotes.set('ou_authz', "include"); 
 	agilenotes.set('group_authz', "inherit");
 	agilenotes.set('role_authz', "inherit");
